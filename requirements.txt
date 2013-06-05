@@ -1,0 +1,8 @@
+appy.pod==0.2.1
+appy.shared==0.1.0
+argparse==1.2.1
+ipython==0.13.2
+lpod-python==v1.1.3-1-g271366a
+lxml==3.2.1
+wsgiref==0.1.2
+yolk==0.4.3

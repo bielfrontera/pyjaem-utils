@@ -1,0 +1,8 @@
+old
+*.log
+*.pot
+*.pyc
+*~
+output
+input
+local_settings.py
