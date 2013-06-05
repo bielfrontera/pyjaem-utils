@@ -99,9 +99,12 @@ with open(infilepath, 'rb') as infile:
                 print "\n    <div class='nuclis'>Nucleo temático: %s</div>" % ', '.join(nuclis)
             else:
                 print "\n    <div class='nuclis'>Nucleos temáticos: %s</div>" % ', '.join(nuclis)
+        if len(aportacio['Foto']) > 0:
+            print "\n    <img%s|right|largeur=200>" % aportacio['Foto'].decode('utf-8')
 
         if len(aportacio['Observacions']) > 0:
             print "\n    <div class='observacions'>%s</div>" % aportacio['Observacions'].decode('utf-8')
+            print "\n    <div class='clear'></div>"
         print "\n    <div class='resum'>%s</div>" % aportacio['Resum'].decode('utf-8')
 
 
