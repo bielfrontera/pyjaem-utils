@@ -77,14 +77,21 @@ def InsertSingleEvent(calendar_client, calendar_url, title,content, where,start_
 
     return new_event
 
+def local_to_utc(t):
+    secs = time.mktime(t)
+    return time.gmtime(secs)
+
 def main():
     client = gdata.calendar.client.CalendarClient(source='xvijaem-generacalendari-v1')
     client.ClientLogin(local_settings.CAL_USER, local_settings.CAL_PWD, client.source)
-
-    # CreateCalendar(client)
+    #
     calendar_list = PrintUserCalendars(client)
-
     calendari_url = GetCalendarUrl(calendar_list,'XVI JAEM - Palma 2013')
+    if len(calendari_url) == 0:
+        CreateCalendar(client)
+        calendar_list = PrintUserCalendars(client)
+        calendari_url = GetCalendarUrl(calendar_list,'XVI JAEM - Palma 2013')
+
     print calendari_url
 
     seccions = []
@@ -110,8 +117,8 @@ def main():
             str_end_time = '2013-07-0%s %s' % (aportacio['Dia'].decode('utf-8'),hora_parts[2])
             t_end_time = time.strptime(str_end_time,'%Y-%m-%d %H:%M')
 
-            start_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', t_start_time)
-            end_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', t_end_time)
+            start_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', local_to_utc(t_start_time))
+            end_time = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', local_to_utc(t_end_time))
             InsertSingleEvent(client, calendari_url, title,content, where,start_time,end_time)
 
 
